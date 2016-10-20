@@ -1,4 +1,3 @@
-# $Id$
 # Maintainer: jun7 <jun7@hush.com>
 # Contributor: Florian pritz <bluewind@xinu.at>
 # Contributor: Bartłomiej Piotrowski <nospam@bpiotrowski.pl>
@@ -6,15 +5,15 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 # Contributor: tobias <tobias@archlinux.org>
 
-pkgname=openbox
+pkgname=openbox-1pixelwm
 pkgver=3.6.1
 pkgrel=3
-branch=1pix
+branch=1pixel
 pkgdesc='Highly configurable and lightweight X11 window manager'
 arch=('i686' 'x86_64')
 url='http://openbox.org'
 license=('GPL')
-provides=(libobrender.so)
+confricts=('openbox')
 depends=('startup-notification' 'libxml2' 'libxinerama' 'libxrandr'
          'libxcursor' 'pango' 'imlib2' 'librsvg' 'libsm')
 optdepends=('plasma-workspace: for the KDE/Openbox xsession'
@@ -34,6 +33,8 @@ prepare() {
 
 build() {
   cd "$srcdir/openbox"
+
+  ./bootstrap
 
   ./configure --prefix=/usr \
     --with-x \
