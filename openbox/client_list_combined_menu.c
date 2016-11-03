@@ -41,7 +41,7 @@ static ObMenu *combined_menu;
 static void self_cleanup(ObMenu *menu, gpointer data)
 {
     menu_clear_entries(menu);
-    focus_cycle_draw_indicator(NULL);
+    //focus_cycle_draw_indicator(NULL);
 }
 
 static gint get_order(ObClient *c, guint desktop)
@@ -128,12 +128,15 @@ static void menu_selected(ObMenuEntry *self, ObMenuFrame *f,
                          ObClient *c, guint state, gpointer data)
 {
     if (self->id == screen_desktop)
-        focus_cycle_draw_indicator(self->data.normal.data);
+	{
+		client_activate(self->data.normal.data, TRUE, state & ShiftMask, TRUE, TRUE, TRUE);
+		//focus_cycle_draw_indicator(self->data.normal.data);
+	}
 }
 static void menu_deselected(ObMenuEntry *self, ObMenuFrame *f,
                          ObClient *c, guint state, gpointer data)
 {
-    focus_cycle_draw_indicator(NULL);
+    //focus_cycle_draw_indicator(NULL);
 }
 
 static void menu_execute(ObMenuEntry *self, ObMenuFrame *f,
